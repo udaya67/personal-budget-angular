@@ -3,20 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- This is an SEO Change -->
+    <meta name="description" content="Manage your personal budget with ease using our free app. Stay on track, set alerts, and get results to help you stick to your budget.">
+    <!-- This is an SEO Change -->
+    <meta name="keywords" content="personal budget, budget management, free budget app, financial planning, budgeting, expense tracker">
+    <!-- This is an SEO Change -->
+    <meta name="robots" content="index, follow">
     <title>Personal Budget</title>
     <link rel="stylesheet" href="/reset.css">
     <link rel="stylesheet" href="/main.css">
 </head>
 <body>
-
-    <div class="menu">
-        <ul>
-            <li><a href="/">Homepage</a></li>
-            <li><a href="/about.html">About</a></li>
-            <li><a href="/login.html">Login</a></li>
-            <li><a href="https://google.com">Google</a></li>
-        </ul>
-    </div>
+    <!-- This is a A11y Change - Skip to Content Link -->
+    <a href="#main-content" class="skip-to-content">Skip to Content</a>
+    <!-- This is a Semantic HTML Change -->
+    <header>
+        <div class="menu">
+            <ul>
+                <!-- This is an A11y Change - aria-label for navigation links -->
+                <li><a href="/" aria-label="Homepage">Homepage</a></li>
+                <li><a href="/about.html" aria-label="About Us">About</a></li>
+                <li><a href="/login.html" aria-label="Login Page">Login</a></li>
+                <li><a href="https://google.com" aria-label="Google Website">Google</a></li>
+            </ul>
+        </div>
+    </header>
 
     <div class="hero">
         <h1>Personal Budget</h1>
@@ -24,82 +35,90 @@
     </div>
 
     <div class="container center">
-
         <div class="page-area">
+            <article class="text-box">
+                <h1>Stay on track</h1>
+                <p>
+                    Do you know where you are spending your money? If you really stop to track it down,
+                    you would get surprised! Proper budget management depends on real data... and this
+                    app will help you with that!
+                </p>
+            </article>
+            <!-- This is a Semantic HTML Change -->
 
-            <div class="text-box">
-                <h1>Stay on track</h1>
-                <p>
-                    Do you know where you are spending your money? If you really stop to track it down,
-                    you would get surprised! Proper budget management depends on real data... and this
-                    app will help you with that!
-                </p>
-            </div>
-    
-            <div class="text-box">
+            <article class="text-box">
                 <h1>Alerts</h1>
                 <p>
                     What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
                 </p>
-            </div>
-    
-            <div class="text-box">
+            </article>
+            <!-- This is a Semantic HTML Change -->
+
+            <article class="text-box">
                 <h1>Results</h1>
                 <p>
                     People who stick to a financial plan, budgeting every expense, get out of debt faster!
                     Also, they to live happier lives... since they expend without guilt or fear... 
                     because they know it is all good and accounted for.
                 </p>
-            </div>
-    
-            <div class="text-box">
+            </article>
+            <!-- This is a Semantic HTML Change -->
+
+            <article class="text-box">
                 <h1>Free</h1>
                 <p>
                     This app is free!!! And you are the only one holding your data!
                 </p>
-            </div>
-    
-            <div class="text-box">
+            </article>
+        
+
+            <!-- This is a Semantic HTML Change -->
+            <article class="text-box">
                 <h1>Stay on track</h1>
                 <p>
                     Do you know where you are spending your money? If you really stop to track it down,
                     you would get surprised! Proper budget management depends on real data... and this
                     app will help you with that!
                 </p>
-            </div>
+            </article>
+            <!-- This is a Semantic HTML Change -->
     
-            <div class="text-box">
+            <article class="text-box">
                 <h1>Alerts</h1>
                 <p>
                     What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
                 </p>
-            </div>
+            </article>
+            <!-- This is a Semantic HTML Change -->
     
-            <div class="text-box">
+            <article class="text-box">
                 <h1>Results</h1>
                 <p>
                     People who stick to a financial plan, budgeting every expense, get out of debt faster!
                     Also, they to live happier lives... since they expend without guilt or fear... 
                     because they know it is all good and accounted for.
                 </p>
-            </div>
+            </article>
+            <!-- This is a Semantic HTML Change -->
     
-            <div class="text-box">
+            <article class="text-box">
                 <h1>Free</h1>
                 <p>
                     This app is free!!! And you are the only one holding your data!
                 </p>
-            </div>
+            </article>
 
         </div>
 
     </div>
 
-    <div class="bottom">
+    <!-- This is a Semantic HTML Change -->
+    <!-- This is an A11y Change - High Contrast -->
+    <footer class="bottom" style="background-color: #000; color: #fff;">
         <div class="center">
             All rights reserved &copy; Fabio Nolasco
         </div>
-    </div>
+    </footer>
 
 </body>
 </html>
