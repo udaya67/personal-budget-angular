@@ -12,6 +12,13 @@
     <title>Personal Budget</title>
     <link rel="stylesheet" href="/reset.css">
     <link rel="stylesheet" href="/main.css">
+
+    <!-- <style>
+        svg {
+            background-color: lightgray;
+            margin-top: 20px;
+        }
+    </style> -->
 </head>
 <body>
     <!-- This is a A11y Change - Skip to Content Link -->
@@ -74,6 +81,11 @@
                 </p>
             </article>
 
+            <article>
+                <h2>D3.js Chart</h2>
+                <svg id="d3-chart" width="400" height="400"></svg>
+            </article>
+
         </div>
 
     </div>
@@ -88,6 +100,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script>
         var dataSource = {
                 datasets: [
@@ -115,15 +130,53 @@
             });
         }
 
+        function createD3Chart(data) {
+            const width = 400, height = 400, radius = Math.min(width, height) / 2;
+
+            // Select the SVG and clear previous content
+            const svg = d3.select("#d3-chart")
+                          .attr("width", width)
+                          .attr("height", height)
+                          .append("g")
+                          .attr("transform", `translate(${width / 2}, ${height / 2})`);
+
+            const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+            const pie = d3.pie().value(d => d.budget);
+            const arc = d3.arc().innerRadius(0).outerRadius(radius);
+
+            const arcs = svg.selectAll("arc")
+                            .data(pie(data))
+                            .enter()
+                            .append("g");
+
+            arcs.append("path")
+                .attr("d", arc)
+                .attr("fill", (d, i) => color(i));
+
+            // Add Labels
+            arcs.append("text")
+                .attr("transform", d => `translate(${arc.centroid(d)})`)
+                .attr("text-anchor", "middle")
+                .attr("font-size", "12px")
+                .attr("fill", "white")
+                .text(d => d.data.title);
+        }
+
+        // Fetch budget data
         function getBudget() {
             axios.get('http://localhost:3000/budget')
-            .then(function (res) {
-                for (var i = 0; i < res.data.myBudget.length; i++) {
-                    dataSource.datasets[0].data[i] = res.data.myBudget[i].budget;
-                    dataSource.labels[i] = res.data.myBudget[i].title;
+                .then(function (res) {
+                    const budgetData = res.data.myBudget;
+
+                    // Load data into Chart.js
+                    dataSource.labels = budgetData.map(item => item.title);
+                    dataSource.datasets[0].data = budgetData.map(item => item.budget);
                     createChart();
-                }
-            });
+
+                    // Load data into D3.js Chart
+                    createD3Chart(budgetData);
+                });
         }
 
         getBudget();
