@@ -12,13 +12,6 @@
     <title>Personal Budget</title>
     <link rel="stylesheet" href="/reset.css">
     <link rel="stylesheet" href="/main.css">
-
-    <!-- <style>
-        svg {
-            background-color: lightgray;
-            margin-top: 20px;
-        }
-    </style> -->
 </head>
 <body>
     <!-- This is a A11y Change - Skip to Content Link -->
@@ -143,7 +136,7 @@
             const color = d3.scaleOrdinal(d3.schemeCategory10);
 
             const pie = d3.pie().value(d => d.budget);
-            const arc = d3.arc().innerRadius(0).outerRadius(radius);
+            const arc = d3.arc().innerRadius(100).outerRadius(radius);
 
             const arcs = svg.selectAll("arc")
                             .data(pie(data))
@@ -169,12 +162,9 @@
                 .then(function (res) {
                     const budgetData = res.data.myBudget;
 
-                    // Load data into Chart.js
                     dataSource.labels = budgetData.map(item => item.title);
                     dataSource.datasets[0].data = budgetData.map(item => item.budget);
                     createChart();
-
-                    // Load data into D3.js Chart
                     createD3Chart(budgetData);
                 });
         }
