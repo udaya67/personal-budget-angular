@@ -7,7 +7,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'pb-root',
-  imports: [RouterOutlet, MenuComponent, HeroComponent, FooterComponent, BreadcrumbsComponent],
+  imports: [RouterOutlet, MenuComponent, HeroComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
