@@ -4,14 +4,16 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Chart} from 'chart.js/auto';
 import { Console } from 'console';
+import { BreadcrumbsComponent } from '../breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'pb-homepage',
-  imports: [ArticleComponent],
+  imports: [ArticleComponent, BreadcrumbsComponent],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
 })
-export class HomepageComponent implements OnInit {
+export class HomepageComponent implements AfterViewInit {
+
   public dataSource = {
     datasets: [
         {
@@ -32,7 +34,7 @@ export class HomepageComponent implements OnInit {
   constructor(private http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.http.get('http://localhost:3000/budget')
     .subscribe((res : any) => {
 
