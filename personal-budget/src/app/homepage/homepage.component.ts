@@ -176,16 +176,20 @@ export class HomepageComponent implements AfterViewInit {
 
       // Define the arc generator
       const arc = d3.arc<d3.PieArcDatum<{ budget: number; title: string }>>()
-                    .innerRadius(0) // Full pie chart
-                    .outerRadius(radius); // Outer radius
+  .innerRadius(0)
+  .outerRadius(radius); // Outer radius
 
       // Create arc paths (pie slices)
-      svg.selectAll('path')
-        .data(pie(data)) // Pass data for the pie chart
-        .enter()
-        .append('path')
-        .attr('d', arc as any) // Generate the arc for each pie slice
-        .attr('fill', (d: d3.PieArcDatum<any>) => color(d.data.title)) // Use title to assign the color
+      const arcs = svg.selectAll('.arc')
+  .data(pie(data))
+  .enter()
+  .append('g')
+  .attr('class', 'arc');
+
+arcs.append('path')
+  .attr('d', arc as any)
+  .attr('fill', (d) => color(d.data.title));
+
 
       // Add labels to the pie slices
       svg.selectAll("text")
@@ -193,8 +197,10 @@ export class HomepageComponent implements AfterViewInit {
         .enter()
         .append("text")
         .text((d: any) => d.data.title) // Set the label text as the title
-        .attr("transform", (d: any) => `translate(${arc.centroid(d)})`) // Position label at the centroid of the arc
-        .style("text-anchor", "middle") // Center the label
+        .attr("transform", (d: any) => {
+          const [x, y] = arc.centroid(d);
+          return `translate(${x}, ${y})`;
+        })        .style("text-anchor", "middle") // Center the label
         .style("font-size", "12px") // Set font size
         .style("fill", "white"); // Set label color to white
     }
